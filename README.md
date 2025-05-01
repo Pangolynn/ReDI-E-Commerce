@@ -38,3 +38,4 @@ filter the products, add them to a shopping cart, and (mock) checkout.
 - https://react.dev/ 
 - https://reactrouter.com/
 - https://tailwindcss.com/
+- https://developer.mozilla.org/
