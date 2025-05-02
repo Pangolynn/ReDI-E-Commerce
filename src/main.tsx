@@ -6,11 +6,15 @@ import {
 } from "react-router";
 import './index.css'
 import App from './App.tsx'
+import {Products} from "./components/Products.tsx";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <App />,
+        children: [
+            { index: true, Component: Products}
+        ]
     },
 ]);
 
