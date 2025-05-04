@@ -5,8 +5,9 @@ function App() {
 
   return (
     <div className="app-container">
-        <nav className="flex justify-end mr-2">
-            <ul className="flex space-between gap-4">
+        <nav className="mt-4 flex justify-between mr-2">
+            <div className="mx-4"><a href="/" >ReDI E-Commerce</a></div>
+            <ul className="flex space-between gap-4 mr-4">
                 <li>Products</li>
                 <li>Cart</li>
                 <li>Checkout</li>

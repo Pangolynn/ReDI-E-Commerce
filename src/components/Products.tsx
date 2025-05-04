@@ -12,7 +12,7 @@ export type ProductType = {
 }
 
 export const Products = () => {
-    const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState<ProductType[]>([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -38,10 +38,13 @@ export const Products = () => {
 
 
     return (
-        <>
-            {products.map((product) => (
+        <div className="container mx-auto">
+        <h1 className="text-center my-10 font-extrabold text-3xl">All Products</h1>
+        <div className="grid my-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {products.map((product: ProductType) => (
               <Product key={product.id} product={product} />
             ))}
-        </>
+        </div>
+        </div>
     )
 }
