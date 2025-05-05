@@ -7,13 +7,18 @@ import {
 import './index.css'
 import App from './App.tsx'
 import {Products} from "./components/Products.tsx";
+import {ProductDetails} from "./components/ProductDetails.tsx";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <App />,
         children: [
-            { index: true, Component: Products}
+            { index: true, Component: Products},
+            {
+                path: "product-details/:id",
+                Component: ProductDetails
+            }
         ]
     },
 ]);
