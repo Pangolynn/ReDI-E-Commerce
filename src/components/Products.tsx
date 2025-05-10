@@ -8,7 +8,8 @@ export type ProductType = {
     description: string,
     price: number,
     rating: number,
-    thumbnail: string
+    thumbnail: string,
+    quantity?: number,
 }
 
 export const Products = () => {
@@ -35,7 +36,6 @@ export const Products = () => {
         }
         fetchData()
     },[]);
-
 
     return (
         <div className="container mx-auto">

@@ -8,6 +8,7 @@ import './index.css'
 import App from './App.tsx'
 import {Products} from "./components/Products.tsx";
 import {ProductDetails} from "./components/ProductDetails.tsx";
+import {Cart} from "./components/Cart.tsx";
 
 const router = createBrowserRouter([
     {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
         element: <App />,
         children: [
             { index: true, Component: Products},
+            {
+                path: "cart",
+                Component: Cart
+            },
             {
                 path: "product-details/:id",
                 Component: ProductDetails
