@@ -1,6 +1,6 @@
 import { ProductType } from "./Products.tsx";
-import {useEffect, useContext} from "react";
-import {CartContext} from "../App.tsx";
+import {useContext} from "react";
+import {CartContext} from "../contexts/CartContext.tsx";
 import {Link} from "react-router";
 
 type ProductProps = {
@@ -9,10 +9,6 @@ type ProductProps = {
 
 export const Product = ({ product }: ProductProps) => {
     const {addToCart} = useContext(CartContext);
-
-    useEffect(() => {
-        console.log(product)
-    },[])
 
     return (
         <div className="flex flex-col mx-4 my-10 mx-auto px-2">
@@ -28,7 +24,7 @@ export const Product = ({ product }: ProductProps) => {
             <span className="font-bold">${product.price}</span>
             <span><Link to={`/product-details/${product.id}`} className="underline text--700">View Details</Link></span>
             <button
-                className="rounded mt-2 py-2 w-full text-stone-900 bg-sakura"
+                className="rounded cursor-pointer transition active:scale-95 mt-4 w-30 py-2 text-stone-900 bg-sakura hover:bg-rose-200"
                 onClick={() => addToCart(product)}
             >Add to Cart</button>
         </div>

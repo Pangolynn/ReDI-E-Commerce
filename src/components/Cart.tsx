@@ -1,12 +1,8 @@
-import {useContext, useEffect} from "react";
-import {CartContext} from "../App.tsx";
+import {useContext} from "react";
+import {CartContext} from "../contexts/CartContext.tsx";
 
 export const Cart = () => {
-   const { cart, addToCart } = useContext(CartContext);
-
-   useEffect(() => {
-       console.log(cart);
-   },[])
+   const { cart } = useContext(CartContext);
 
     return (
         <div className="flex flex-col">
