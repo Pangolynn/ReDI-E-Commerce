@@ -5,11 +5,15 @@ import { ProductType } from "../components/Products.tsx";
 export const CartContext = createContext<{
     cart: ProductType[];
     addToCart: (product: ProductType) => void;
+    removeFromCart: (id: number) => void;
+    removeAllFromCart: () => void;
+    decreaseQuantity: (id: number) => void;
 }>({
     cart: [],
-    addToCart: () => {}
-    // removeFromCart: () => {},
-    // removeAllFromCart: () => {}
+    addToCart: () => {},
+    removeFromCart: () => {},
+    removeAllFromCart: () => {},
+    decreaseQuantity: () => {},
 });
 
 // Provider for cart state and state management functions
@@ -18,7 +22,6 @@ export const CartProvider = ({ children } : {children: React.ReactNode}) => {
     let loadingLocalStorage: boolean = false;
 
     const addToCart = (product: ProductType) => {
-        console.log("add to cart", product);
         setCart(prev => {
             // Check if product already exists in cart and increment quantity if it does
             const prod: ProductType | undefined = prev.find(p => p.id == product.id);
@@ -31,6 +34,28 @@ export const CartProvider = ({ children } : {children: React.ReactNode}) => {
             }
         });
     }
+
+    const removeFromCart = (id: number) => {
+        console.log('remove from cart', id);
+        setCart(prev => prev.filter(p => p.id !== id));
+    }
+
+    const removeAllFromCart = () => {
+        setCart([] as ProductType[]);
+    }
+
+    // const decreaseQuantity = (id: number) => {
+    //     console.log('decrease quantity', cart);
+    //     const prod: ProductType | undefined = cart.find(p => p.id === id)
+    //     console.log(prod.quantity);
+    //     if (prod && prod.quantity === 1 || prod && prod.quantity === 0) {
+    //         console.log('remove from cart decrease', id);
+    //         removeFromCart(id);
+    //         return;
+    //     }
+    //     // setCart(prev => prev.map(p => p.id === id ? {...p , quantity: p.quantity ? (p.quantity - 1) : 0} : p));
+    //     console.log(cart);
+    // }
 
     // check if we have a cart in local storage
     useEffect(() => {
@@ -56,5 +81,5 @@ export const CartProvider = ({ children } : {children: React.ReactNode}) => {
         localStorage.setItem('products', JSON.stringify(cart));
     }, [cart]);
 
-    return <CartContext.Provider value={{cart, addToCart}}>{children}</CartContext.Provider>
+    return <CartContext.Provider value={{cart, addToCart, removeFromCart,  removeAllFromCart}}>{children}</CartContext.Provider>
 }
