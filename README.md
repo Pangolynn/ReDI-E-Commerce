@@ -42,3 +42,6 @@ filter the products, add them to a shopping cart, and (mock) checkout.
 - https://flowbite.com/docs/components/spinner/
 - https://medium.com/@sazzadur/how-to-create-a-custom-react-hook-for-localstorage-using-react-context-e9930812e9bf
 - https://www.freecodecamp.org/news/how-to-use-localstorage-with-react-hooks-to-set-and-get-items/
+- https://react-hook-form.com/
+- https://stackoverflow.com/
+- https://www.reshot.com/

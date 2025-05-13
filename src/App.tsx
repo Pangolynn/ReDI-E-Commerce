@@ -11,7 +11,7 @@ function App() {
                 <ul className="flex space-between gap-4 mr-4 ">
                     <Link to="/">Products</Link>
                     <Link to="/cart">Cart</Link>
-                    <li>Checkout</li>
+                    <Link to="/checkout">Checkout</Link>
                 </ul>
             </nav>
             <Outlet />

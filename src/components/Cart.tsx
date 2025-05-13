@@ -8,11 +8,15 @@ export const Cart = () => {
    let total = 0;
 
     return (
-        <div className="flex flex-col justify-center items-center gap-4">
-            <h1 className="text-center my-10 font-extrabold text-3xl">Cart</h1>
+        <>
+        <h1 className="text-center my-10 font-extrabold text-3xl">Cart</h1>
+        <div className="flex flex-col container m-auto justify-center items-center gap-4">
+
             {cart.map((product) => {
                 total += product.price * (product.quantity || 1);
-                return (<div key={product.id}>
+                return (
+                    <div className="container">
+                    <div className="w-1/2 mx-auto" key={product.id}>
                         <div className="flex justify-between items-center" >
                             <button aria-label="Remove from cart"
                                 className="text-red-400 rounded cursor-pointer transition active:scale-95 mt-4 w-10 h-10 py-2 hover:bg-rose-200 hover:text-red-600"
@@ -23,14 +27,20 @@ export const Cart = () => {
                                 <h2>{product.title}</h2>
                                 <img className="h-30" src={product.thumbnail} alt={product.title}/>
                             </div>
-                            <div className="flex flex-col justify-center items-center gap-4">
+                            <div className="flex flex-col justify-center items-center gap-4 self-start">
                                 <p>Quantity: {product.quantity || 1}</p>
-                                <button onClick={() => decreaseQuantity(product.id)} className="text-red-400 hover:text-red-600 p-10 hover:bg-red-100">-</button>
-                                <span className="cost">Price: {product.price}</span>
+                                <button
+                                    aria-label="Decrease quantity by 1"
+                                    onClick={() => decreaseQuantity(product.id)}
+                                    className="bg-red-100 rounded text-red-400 hover:text-red-600 px-2 hover:bg-red-200">
+                                    -
+                                </button>
+                                <span className="cost self-end">Price: {product.price * (product.quantity || 1)}</span>
                             </div>
                         </div>
-                        {(cart.length > 1) && <hr className=" mt-2 h-1/2 w-1/2 bg-sakura border-sakura"/>}
-                        </div>
+                    </div>
+                    {(cart.length > 1) && <hr className=" mx-auto mt-2 h-1/2 w-1/2 bg-sakura border-sakura"/>}
+                    </div>
             )
             })}
             {(cart.length === 0) ?
@@ -59,5 +69,6 @@ export const Cart = () => {
                 </>
             }
         </div>
+        </>
     )
 }
