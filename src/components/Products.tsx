@@ -14,7 +14,10 @@ export type ProductType = {
 
 export const Products = () => {
     const [products, setProducts] = useState<ProductType[]>([]);
+    const [selectedProducts, setSelectedProducts] = useState<ProductType[]>([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [filter, setFilter] = useState<string>("all");
+    const [categories, setCategories] = useState<string[]>([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -25,7 +28,16 @@ export const Products = () => {
                     throw new Error("Fetch failed: not OK")
                 }
                 const json = await data.json();
-                setProducts(json.products);
+                const jsonProducts = json.products as ProductType[];
+                // set all of the products
+                setProducts(jsonProducts);
+                // selectedProducts will change based on filters, start with all
+                setSelectedProducts(json.products);
+                // Get the unique categories from the product data to use as
+                // filter options
+                const categoriesArray: string[] = jsonProducts.map(product  => product.category);
+                // set the available categories state
+                setCategories(Array.from(new Set(categoriesArray)));
                 setIsLoading(false);
             } catch (e) {
                 if(e instanceof Error) {
@@ -41,9 +53,34 @@ export const Products = () => {
         fetchData();
     },[]);
 
+    // update the products shown based on the selected filter value
+    const filterProducts = (filterValue: string) => {
+        if (filterValue === "all") {
+            setFilter(filterValue);
+            setSelectedProducts(products);
+        } else {
+            setFilter(filterValue);
+            setSelectedProducts(products.filter(product => product.category === filterValue));
+        }
+    }
+
     return (
         <div className="container mx-auto">
-            <h1 className="text-center my-10 font-extrabold text-3xl">All Products</h1>
+            <h1 className="text-center mt-10 font-extrabold text-3xl">Products</h1>
+            <select className="text-end"
+                    name="category"
+                    value={filter}
+                    onChange={e => filterProducts(e.target.value)}
+            >
+                <option value="all">All</option>
+                {categories.map(category => {
+                    return (
+                        <option key={category} value={category}>
+                            {category}
+                        </option>
+                    )
+                })}
+            </select>
             {isLoading && <div className="flex justify-center items-center text-align-center">
                 <svg aria-hidden="true"
                      className="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-sakura"
@@ -57,12 +94,11 @@ export const Products = () => {
                 </svg>
                 <span className="sr-only">Loading...</span>
             </div>}
-            <div className="grid my-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="grid mt-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
 
-            {products.map((product: ProductType) => (
+            {selectedProducts.map((product: ProductType) => (
               <Product key={product.id} product={product} />
             ))
-
             }
             </div>
         </div>

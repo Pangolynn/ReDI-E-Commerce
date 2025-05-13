@@ -30,7 +30,6 @@ export const Checkout = () => {
     // navigate to the checkout page after the user submits
     // send the submitted data and the total
     const onSubmit: SubmitHandler<Inputs> = (data) => {
-        console.log(data);
         navigate("/receipt", {
             state: {
                 form: data,
@@ -44,7 +43,7 @@ export const Checkout = () => {
 
     return (
         <div className="container mx-auto">
-            <h1 className="my-10 text-center">Checkout</h1>
+            <h1 className="my-10 text-center text-2xl sm:text-3xl">Checkout</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mx-4">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <label className="text-sm italic block">First Name</label>
@@ -130,9 +129,9 @@ export const Checkout = () => {
                         {cart.map((product) => {
                         total += product.price * (product.quantity || 1);
                         return (
-                            <div className="grid grid-cols-2" key={product.id}>
+                            <div key={product.id} className="grid grid-cols-2" >
                                 <h3>{product.title} x {product.quantity}</h3>
-                                    <span className="block text-end">{(product.quantity || 1) * product.price}</span>
+                                <span className="block text-end">{(product.quantity || 1) * product.price}</span>
                             </div>
                         )
                     })}
