@@ -11,7 +11,7 @@ export const Product = ({ product }: ProductProps) => {
     const {addToCart} = useContext(CartContext);
 
     return (
-        <div className="flex flex-col mx-4 my-10 mx-auto px-2">
+        <div className="flex flex-col my-10 mx-auto px-2">
             <Link to={`/product-details/${product.id}`}>
                 <h2 className="font-extrabold">{product.title}</h2>
             </Link>

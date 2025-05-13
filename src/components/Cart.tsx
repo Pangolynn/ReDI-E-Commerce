@@ -4,7 +4,7 @@ import cartIcon from  "../assets/cartIcon.svg";
 import {Link} from "react-router";
 
 export const Cart = () => {
-   const { cart, removeFromCart, removeAllFromCart, } = useContext(CartContext);
+   const { cart, removeFromCart, removeAllFromCart, decreaseQuantity } = useContext(CartContext);
    let total = 0;
 
     return (
@@ -25,7 +25,7 @@ export const Cart = () => {
                             </div>
                             <div className="flex flex-col justify-center items-center gap-4">
                                 <p>Quantity: {product.quantity || 1}</p>
-                                {/*<button onClick={() => decreaseQuantity(product.id)} className="text-red-400 hover:text-red-600 p-10 hover:bg-red-100">-</button>*/}
+                                <button onClick={() => decreaseQuantity(product.id)} className="text-red-400 hover:text-red-600 p-10 hover:bg-red-100">-</button>
                                 <span className="cost">Price: {product.price}</span>
                             </div>
                         </div>
@@ -33,10 +33,10 @@ export const Cart = () => {
                         </div>
             )
             })}
-            {(cart === undefined || cart.length === 0) ?
+            {(cart.length === 0) ?
                 <div className="flex-col justify-center align-middle text-center">
                     <div>Cart is Empty</div>
-                    <img className="h-40 mt-10" src={cartIcon} />
+                    <img className="h-40 mt-10" src={cartIcon} alt="cart icon" />
                 </div> :
                 <>
                     <div className="flex justify-center items-center">

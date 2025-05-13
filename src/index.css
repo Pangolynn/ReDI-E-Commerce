@@ -9,13 +9,13 @@
 }
 
 body {
-    font-family: var(--fira);
+    font-family: var(--fira), sans-serif;
 }
 
 h1 {
-    font-family: var(--italiana);
+    font-family: var(--italiana), serif;
 }
 
 nav {
-    font-family: var(--italiana);
+    font-family: var(--italiana), serif;
 }
