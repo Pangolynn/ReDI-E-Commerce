@@ -15,8 +15,8 @@ export const Cart = () => {
             {cart.map((product) => {
                 total += product.price * (product.quantity || 1);
                 return (
-                    <div className="container">
-                    <div className="w-1/2 mx-auto" key={product.id}>
+                    <div className="container" key={product.id}>
+                    <div className="w-1/2 mx-auto">
                         <div className="flex justify-between items-center" >
                             <button aria-label="Remove from cart"
                                 className="text-red-400 rounded cursor-pointer transition active:scale-95 mt-4 w-10 h-10 py-2 hover:bg-rose-200 hover:text-red-600"

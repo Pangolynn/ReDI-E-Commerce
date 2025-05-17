@@ -2,6 +2,9 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import {CartContext} from "../contexts/CartContext.tsx";
 import {useContext} from "react";
 import {useNavigate} from "react-router";
+import {Form} from "./Form.tsx";
+import {Input} from "./Input.tsx";
+
 
 // all the fields for our checkout form
 export type Inputs = {
@@ -18,18 +21,24 @@ export type Inputs = {
     phone: string,
 }
 
+export type Validation = {
+    required?: boolean,
+    maxLength?: number,
+    minLength?: number,
+    pattern?: { value: RegExp, message: string },
+}
+
 export const Checkout = () => {
    const navigate = useNavigate();
     const { cart } = useContext(CartContext);
     const {
-        register,
-        handleSubmit,
         formState: { errors },
     } = useForm<Inputs>();
 
     // navigate to the checkout page after the user submits
     // send the submitted data and the total
     const onSubmit: SubmitHandler<Inputs> = (data) => {
+
         navigate("/receipt", {
             state: {
                 form: data,
@@ -45,78 +54,28 @@ export const Checkout = () => {
         <div className="container mx-auto">
             <h1 className="my-10 text-center text-2xl sm:text-3xl">Checkout</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mx-4">
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <label className="text-sm italic block">First Name</label>
-                    <input
-                        className="block border-2 text-slate-700 border-gray-300 rounded-md p-1 focus:outline-none focus:ring-2 focus:ring-sakura"
-                        {...register("firstName", {required: true})}
-                    />
-                    {errors.firstName && <span className="text-sm block text-red-500">This field is required</span>}
-                    <label className="text-sm italic block">Last Name</label>
-                    <input
-                        className="block border-2 text-slate-700 border-gray-300 rounded-md p-1 focus:outline-none focus:ring-2 focus:ring-sakura"
-                        {...register("lastName", {required: true})}
-                    />
-                    {errors.lastName && <span className="text-sm block text-red-500">This field is required</span>}
-                    <label className="text-sm italic block">Email</label>
-                    <input
-                        className="block border-2 text-slate-700 border-gray-300 rounded-md p-1 focus:outline-none focus:ring-2 focus:ring-sakura"
-                        {...register("email", {required: true})}
-                    />
-                    {errors.email && <span className="text-sm block text-red-500">This field is required</span>}
-                    <label className="text-sm italic block">Address</label>
-                    <input
-                        className="block border-2 text-slate-700 border-gray-300 rounded-md p-1 focus:outline-none focus:ring-2 focus:ring-sakura"
-                        {...register("address", {required: true})}
-                    />
-                    {errors.address && <span className="text-sm block text-red-500">This field is required</span>}
-                    <label className="text-sm italic block">City</label>
-                    <input
-                        className="block border-2 text-slate-700 border-gray-300 rounded-md p-1 focus:outline-none focus:ring-2 focus:ring-sakura"
-                        {...register("city", {required: true})}
-                    />
-                    {errors.city && <span className="text-sm block text-red-500">This field is required</span>}
-                    <label className="text-sm italic block">State</label>
-                    <input
-                        className="block border-2 text-slate-700 border-gray-300 rounded-md p-1 focus:outline-none focus:ring-2 focus:ring-sakura"
-                        {...register("state", {required: true})}
-                    />
-                    {errors.state && <span className="text-sm block text-red-500">This field is required</span>}
-                    <label className="text-sm italic block">Zip Code</label>
-                    <input
-                        className="block border-2 text-slate-700 border-gray-300 rounded-md p-1 focus:outline-none focus:ring-2 focus:ring-sakura"
-                        {...register("zip", {required: true})}
-                    />
-                    {errors.zip && <span className="text-sm block text-red-500">This field is required</span>}
-                    <label className="text-sm italic block">Country</label>
-                    <input
-                        className="block border-2 text-slate-700 border-gray-300 rounded-md p-1 focus:outline-none focus:ring-2 focus:ring-sakura"
-                        {...register("country", {required: true})}
-                    />
-                    {errors.country && <span className="text-sm block text-red-500">This field is required</span>}
-                    <label className="text-sm italic block">Credit Card</label>
-                    <input
-                        className="block border-2 text-slate-700 border-gray-300 rounded-md p-1 focus:outline-none focus:ring-2 focus:ring-sakura"
-                        {...register("creditCard", {required: true})}
-                    />
-                    {errors.creditCard && <span className="text-sm block text-red-500">This field is required</span>}
-                    <label className="text-sm italic block">Expiration</label>
-                    <input
-                        className="block border-2 text-slate-700 border-gray-300 rounded-md p-1 focus:outline-none focus:ring-2 focus:ring-sakura"
-                        {...register("expiration", {required: true})}
-                    />
-                    {errors.expiration && <span className="text-sm block text-red-500">This field is required</span>}
-                    <label className="text-sm italic block">Phone</label>
-                    <input
-                        className="block border-2 text-slate-700 border-gray-300 rounded-md p-1 focus:outline-none focus:ring-2 focus:ring-sakura"
-                        {...register("phone", {required: true})}
-                    />
-                    {errors.phone && <span className="text-sm block text-red-500">This field is required</span>}
+                {/*Form and Input are custom components*/}
+                <Form onSubmit={onSubmit} errors={errors}>
+                    <Input validation={{ required: true, maxLength: 100 }} label="First Name" name="firstName" type="text"/>
+                    <Input validation={{ required: true, maxLength: 100  }} label="Last Name" name="lastName" type="text"/>
+                    <Input validation={{ required: true, maxLength: 100, pattern: {
+                            value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                            message: 'Please enter a valid email',
+                        } }} label="Email" name="email" type="email"/>
+                    <Input validation={{ required: true, maxLength: 100 }} label="Address" name="address" type="text"/>
+                    <Input validation={{ required: true, maxLength: 100 }} label="City" name="city" type="text"/>
+                    <Input validation={{ required: true, maxLength: 100 }} label="State" name="state" type="text"/>
+                    <Input validation={{ required: true, maxLength: 30 }} label="Zip Code" name="zipCode" type="number"/>
+                    <Input validation={{ required: true, maxLength: 100 }} label="Country" name="country" type="text"/>
+                    <Input validation={{ required: true, maxLength: 30 }} label="Credit Card Number" name="creditCardNumber" type="number"/>
+                    <Input validation={{ required: true, maxLength: 5 }} label="Expiration" name="expiration" type="text"/>
+                    <Input validation={{ required: true, maxLength: 20 }} label="Phone" name="phone" type="tel"/>
 
+                    <input className="mb-20 rounded cursor-pointer transition active:scale-95 mt-4 w-30 py-2 text-stone-900 bg-sakura hover:bg-rose-200"
+                           value="Checkout"
+                           type="submit" />
+                </Form>
 
-
-                    <input className="mb-20 rounded cursor-pointer transition active:scale-95 mt-4 w-30 py-2 text-stone-900 bg-sakura hover:bg-rose-200" value="Checkout" type="submit" />
-                </form>
                 <div className="container flex-col">
                     <div className="font-[italiana]">Review Your Cart</div>
                     <div className="flex flex-col mt-4 gap-4 outline-3 rounded p-4 bg-sakura outline-sakura">
