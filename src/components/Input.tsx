@@ -3,7 +3,7 @@
 // a react hook form, the name for the input, and the rest of
 // the attributes for the input
 import { FieldError } from "react-hook-form";
-import { Validation } from "./Checkout.tsx";
+import { Inputs, Validation } from "./Checkout.tsx";
 import { UseFormRegister } from "react-hook-form";
 import { FieldValues } from "react-hook-form";
 
@@ -12,7 +12,7 @@ import { FieldValues } from "react-hook-form";
 // is actually used within the form.
 type InputProps = {
     register?: UseFormRegister<FieldValues>;
-    name: string;
+    name: keyof Inputs;
     label: string;
     errors?: FieldError | undefined;
     validation?: Validation;
@@ -42,7 +42,7 @@ export function Input({
                     {errors.message}
                 </span>
             )}
-            {errors && errors?.message?.length == undefined && (
+            {errors && !errors?.message && (
                 <span className="text-sm block text-red-500">
                     Please enter a valid {label}
                 </span>

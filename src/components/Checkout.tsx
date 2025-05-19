@@ -1,4 +1,4 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { SubmitHandler } from "react-hook-form";
 import { CartContext } from "../contexts/CartContext.tsx";
 import { useContext } from "react";
 import { useNavigate } from "react-router";
@@ -30,9 +30,6 @@ export type Validation = {
 export const Checkout = () => {
     const navigate = useNavigate();
     const { cart } = useContext(CartContext);
-    const {
-        formState: { errors },
-    } = useForm<Inputs>();
 
     // navigate to the checkout page after the user submits
     // send the submitted data and the total
@@ -53,7 +50,7 @@ export const Checkout = () => {
             <h1 className="my-10 text-center text-2xl sm:text-3xl">Checkout</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mx-4">
                 {/*Form and Input are custom components*/}
-                <Form onSubmit={onSubmit} errors={errors}>
+                <Form onSubmit={onSubmit}>
                     <Input
                         validation={{ required: true, maxLength: 100 }}
                         label="First Name"
