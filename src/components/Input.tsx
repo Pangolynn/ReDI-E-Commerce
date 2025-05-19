@@ -7,12 +7,16 @@ import { Validation } from "./Checkout.tsx";
 import { UseFormRegister } from "react-hook-form";
 import { FieldValues } from "react-hook-form";
 
+// errors and register are dynamically injected from the Form component
+// add them as optional here to avoid typescript errors where the component
+// is actually used within the form.
 type InputProps = {
-    register: UseFormRegister<FieldValues>;
+    register?: UseFormRegister<FieldValues>;
     name: string;
     label: string;
-    errors: FieldError | undefined;
+    errors?: FieldError | undefined;
     validation?: Validation;
+    type: string;
 };
 
 export function Input({
@@ -21,14 +25,16 @@ export function Input({
     label,
     errors,
     validation,
+    type,
     ...rest
 }: InputProps) {
     return (
         <>
             <label className="text-sm italic block">{label}</label>
             <input
+                type={type}
                 className="block border-2 text-slate-700 border-gray-300 rounded-md p-1 focus:outline-none focus:ring-2 focus:ring-sakura"
-                {...register(name, validation)}
+                {...(register ? register(name, validation) : {})}
                 {...rest}
             />
             {errors?.message && (
