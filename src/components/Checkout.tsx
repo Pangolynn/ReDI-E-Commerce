@@ -1,35 +1,34 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import {CartContext} from "../contexts/CartContext.tsx";
-import {useContext} from "react";
-import {useNavigate} from "react-router";
-import {Form} from "./Form.tsx";
-import {Input} from "./Input.tsx";
-
+import { CartContext } from "../contexts/CartContext.tsx";
+import { useContext } from "react";
+import { useNavigate } from "react-router";
+import { Form } from "./Form.tsx";
+import { Input } from "./Input.tsx";
 
 // all the fields for our checkout form
 export type Inputs = {
-    firstName: string,
-    lastName: string,
-    email: string,
-    address: string,
-    city: string,
-    state: string,
-    zip: string,
-    country: string,
-    creditCard: string,
-    expiration: string,
-    phone: string,
-}
+    firstName: string;
+    lastName: string;
+    email: string;
+    address: string;
+    city: string;
+    state: string;
+    zip: string;
+    country: string;
+    creditCard: string;
+    expiration: string;
+    phone: string;
+};
 
 export type Validation = {
-    required?: boolean,
-    maxLength?: number,
-    minLength?: number,
-    pattern?: { value: RegExp, message: string },
-}
+    required?: boolean;
+    maxLength?: number;
+    minLength?: number;
+    pattern?: { value: RegExp; message: string };
+};
 
 export const Checkout = () => {
-   const navigate = useNavigate();
+    const navigate = useNavigate();
     const { cart } = useContext(CartContext);
     const {
         formState: { errors },
@@ -38,14 +37,13 @@ export const Checkout = () => {
     // navigate to the checkout page after the user submits
     // send the submitted data and the total
     const onSubmit: SubmitHandler<Inputs> = (data) => {
-
         navigate("/receipt", {
             state: {
                 form: data,
                 total: total,
-            }
+            },
         });
-    }
+    };
 
     // the customer's total bill amount
     let total: number = 0;
@@ -56,24 +54,85 @@ export const Checkout = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mx-4">
                 {/*Form and Input are custom components*/}
                 <Form onSubmit={onSubmit} errors={errors}>
-                    <Input validation={{ required: true, maxLength: 100 }} label="First Name" name="firstName" type="text"/>
-                    <Input validation={{ required: true, maxLength: 100  }} label="Last Name" name="lastName" type="text"/>
-                    <Input validation={{ required: true, maxLength: 100, pattern: {
-                            value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                            message: 'Please enter a valid email',
-                        } }} label="Email" name="email" type="email"/>
-                    <Input validation={{ required: true, maxLength: 100 }} label="Address" name="address" type="text"/>
-                    <Input validation={{ required: true, maxLength: 100 }} label="City" name="city" type="text"/>
-                    <Input validation={{ required: true, maxLength: 100 }} label="State" name="state" type="text"/>
-                    <Input validation={{ required: true, maxLength: 30 }} label="Zip Code" name="zipCode" type="number"/>
-                    <Input validation={{ required: true, maxLength: 100 }} label="Country" name="country" type="text"/>
-                    <Input validation={{ required: true, maxLength: 30 }} label="Credit Card Number" name="creditCardNumber" type="number"/>
-                    <Input validation={{ required: true, maxLength: 5 }} label="Expiration" name="expiration" type="text"/>
-                    <Input validation={{ required: true, maxLength: 20 }} label="Phone" name="phone" type="tel"/>
+                    <Input
+                        validation={{ required: true, maxLength: 100 }}
+                        label="First Name"
+                        name="firstName"
+                        type="text"
+                    />
+                    <Input
+                        validation={{ required: true, maxLength: 100 }}
+                        label="Last Name"
+                        name="lastName"
+                        type="text"
+                    />
+                    <Input
+                        validation={{
+                            required: true,
+                            maxLength: 100,
+                            pattern: {
+                                value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                message: "Please enter a valid email",
+                            },
+                        }}
+                        label="Email"
+                        name="email"
+                        type="email"
+                    />
+                    <Input
+                        validation={{ required: true, maxLength: 100 }}
+                        label="Address"
+                        name="address"
+                        type="text"
+                    />
+                    <Input
+                        validation={{ required: true, maxLength: 100 }}
+                        label="City"
+                        name="city"
+                        type="text"
+                    />
+                    <Input
+                        validation={{ required: true, maxLength: 100 }}
+                        label="State"
+                        name="state"
+                        type="text"
+                    />
+                    <Input
+                        validation={{ required: true, maxLength: 30 }}
+                        label="Zip Code"
+                        name="zipCode"
+                        type="number"
+                    />
+                    <Input
+                        validation={{ required: true, maxLength: 100 }}
+                        label="Country"
+                        name="country"
+                        type="text"
+                    />
+                    <Input
+                        validation={{ required: true, maxLength: 30 }}
+                        label="Credit Card Number"
+                        name="creditCardNumber"
+                        type="number"
+                    />
+                    <Input
+                        validation={{ required: true, maxLength: 5 }}
+                        label="Expiration"
+                        name="expiration"
+                        type="text"
+                    />
+                    <Input
+                        validation={{ required: true, maxLength: 20 }}
+                        label="Phone"
+                        name="phone"
+                        type="tel"
+                    />
 
-                    <input className="mb-20 rounded cursor-pointer transition active:scale-95 mt-4 w-30 py-2 text-stone-900 bg-sakura hover:bg-rose-200"
-                           value="Checkout"
-                           type="submit" />
+                    <input
+                        className="mb-20 rounded cursor-pointer transition active:scale-95 mt-4 w-30 py-2 text-stone-900 bg-sakura hover:bg-rose-200"
+                        value="Checkout"
+                        type="submit"
+                    />
                 </Form>
 
                 <div className="container flex-col">
@@ -86,20 +145,27 @@ export const Checkout = () => {
                         <hr className="mt-1 mb-4" />
 
                         {cart.map((product) => {
-                        total += product.price * (product.quantity || 1);
-                        return (
-                            <div key={product.id} className="grid grid-cols-2" >
-                                <h3>{product.title} x {product.quantity}</h3>
-                                <span className="block text-end">{(product.quantity || 1) * product.price}</span>
-                            </div>
-                        )
-                    })}
+                            total += product.price * (product.quantity || 1);
+                            return (
+                                <div
+                                    key={product.id}
+                                    className="grid grid-cols-2"
+                                >
+                                    <h3>
+                                        {product.title} x {product.quantity}
+                                    </h3>
+                                    <span className="block text-end">
+                                        {(product.quantity || 1) *
+                                            product.price}
+                                    </span>
+                                </div>
+                            );
+                        })}
                     </div>
                     <hr className="mt-10 mb-4 border-gray-300" />
                     <div className="mt-4 text-end">Total: {total}</div>
                 </div>
             </div>
         </div>
-
-    )
-}
+    );
+};

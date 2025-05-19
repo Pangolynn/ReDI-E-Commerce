@@ -1,5 +1,5 @@
-import {useForm} from "react-hook-form";
-import {createElement} from "react";
+import { useForm } from "react-hook-form";
+import { createElement } from "react";
 
 // TODO Fix typing for form inputs
 
@@ -12,24 +12,24 @@ export function Form({ defaultValues, children, onSubmit }) {
     const {
         handleSubmit,
         register,
-        formState: { errors }
+        formState: { errors },
     } = useForm({ defaultValues });
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             {Array.isArray(children)
                 ? children.map((child) => {
-                    return child.props.name
-                        ? createElement(child.type, {
-                            ...{
-                                ...child.props,
-                                register,
-                                errors: errors[child.props.name],
-                                key: child.props.name
-                            }
-                        })
-                        : child;
-                })
+                      return child.props.name
+                          ? createElement(child.type, {
+                                ...{
+                                    ...child.props,
+                                    register,
+                                    errors: errors[child.props.name],
+                                    key: child.props.name,
+                                },
+                            })
+                          : child;
+                  })
                 : children}
         </form>
     );

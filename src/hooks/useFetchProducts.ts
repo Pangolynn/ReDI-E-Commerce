@@ -1,5 +1,5 @@
-import {useEffect, useState} from "react";
-import {ProductType} from "../components/Products.tsx";
+import { useEffect, useState } from "react";
+import { ProductType } from "../components/Products.tsx";
 
 export const useFetchProducts = () => {
     const [products, setProducts] = useState<ProductType[]>([]);
@@ -7,14 +7,13 @@ export const useFetchProducts = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [categories, setCategories] = useState<string[]>([]);
 
-
     useEffect(() => {
         const fetchData = async () => {
             try {
                 setIsLoading(true);
-                const data = await fetch('https://dummyjson.com/products');
+                const data = await fetch("https://dummyjson.com/products");
                 if (!data.ok) {
-                    throw new Error("Fetch failed: not OK")
+                    throw new Error("Fetch failed: not OK");
                 }
                 const json = await data.json();
                 const jsonProducts = json.products as ProductType[];
@@ -24,7 +23,9 @@ export const useFetchProducts = () => {
                 setSelectedProducts(json.products);
                 // Get the unique categories from the product data to use as
                 // filter options
-                const categoriesArray: string[] = jsonProducts.map(product => product.category);
+                const categoriesArray: string[] = jsonProducts.map(
+                    (product) => product.category,
+                );
                 // set the available categories state
                 setCategories(Array.from(new Set(categoriesArray)));
                 setIsLoading(false);
@@ -37,9 +38,15 @@ export const useFetchProducts = () => {
                     throw e;
                 }
             }
-        }
+        };
         fetchData();
     }, []);
 
-    return { products, selectedProducts, isLoading, categories, setSelectedProducts};
-}
+    return {
+        products,
+        selectedProducts,
+        isLoading,
+        categories,
+        setSelectedProducts,
+    };
+};
