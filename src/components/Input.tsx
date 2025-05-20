@@ -1,4 +1,3 @@
-// TODO fix error messages for when there is no given message
 // Custom input component, takes the register function from
 // a react hook form, the name for the input, and the rest of
 // the attributes for the input

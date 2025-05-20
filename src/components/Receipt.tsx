@@ -1,5 +1,7 @@
 import { useLocation, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
+import { CartContext } from "../contexts/CartContext.tsx";
+import { useContext } from "react";
 import { Inputs } from "./Checkout.tsx";
 import heart from "../assets/heart.svg";
 
@@ -8,6 +10,7 @@ export const Receipt = () => {
     const navigate = useNavigate();
     // get the state from the checkout component
     const { state } = useLocation();
+    const { removeAllFromCart } = useContext(CartContext);
 
     const [form, setForm] = useState<Inputs>({} as Inputs);
     const [total, setTotal] = useState(0);
@@ -21,6 +24,8 @@ export const Receipt = () => {
             // if we have state from checkout, set it here
             setForm(state.form);
             setTotal(state.total);
+            // empty the cart after checkout
+            removeAllFromCart();
         }
     }, [navigate, state]);
 
