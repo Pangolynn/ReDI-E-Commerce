@@ -47,7 +47,7 @@ export const Cart = () => {
                                             -
                                         </button>
                                         <span className="cost self-end">
-                                            Price:{" "}
+                                            Price:{" $"}
                                             {product.price *
                                                 (product.quantity || 1)}
                                         </span>

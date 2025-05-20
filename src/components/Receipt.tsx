@@ -40,7 +40,7 @@ export const Receipt = () => {
                 <div>Zip Code: {form.zipCode}</div>
                 <div>Phone: {form.phone}</div>
                 <hr className="" />
-                <div className="my-4">Total: {total}</div>
+                <div className="my-4">Total: ${total}</div>
             </div>
         </>
     );

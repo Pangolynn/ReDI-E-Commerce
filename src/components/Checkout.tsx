@@ -152,6 +152,7 @@ export const Checkout = () => {
                                         {product.title} x {product.quantity}
                                     </h3>
                                     <span className="block text-end">
+                                        $
                                         {(product.quantity || 1) *
                                             product.price}
                                     </span>
@@ -160,7 +161,7 @@ export const Checkout = () => {
                         })}
                     </div>
                     <hr className="mt-10 mb-4 border-gray-300" />
-                    <div className="mt-4 text-end">Total: {total}</div>
+                    <div className="mt-4 text-end">Total: ${total}</div>
                 </div>
             </div>
         </div>
