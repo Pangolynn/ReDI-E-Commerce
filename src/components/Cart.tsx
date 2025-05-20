@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { CartContext } from "../contexts/CartContext.tsx";
 import cartIcon from "../assets/cartIcon.svg";
 import { Link } from "react-router";
+import currency from "currency.js";
 
 export const Cart = () => {
     const { cart, removeFromCart, removeAllFromCart, decreaseQuantity } =
@@ -47,9 +48,11 @@ export const Cart = () => {
                                             -
                                         </button>
                                         <span className="cost self-end">
-                                            Price:{" $"}
-                                            {product.price *
-                                                (product.quantity || 1)}
+                                            Price:{" "}
+                                            {currency(
+                                                product.price *
+                                                    (product.quantity || 1),
+                                            ).format()}
                                         </span>
                                     </div>
                                 </div>
@@ -82,7 +85,7 @@ export const Cart = () => {
                         </div>
                         <hr className="my-10 h-1/2 w-1/2 " />
                         <div className="flex total">
-                            Total: {total.toFixed(2)}
+                            Total: {currency(total).format()}
                         </div>
 
                         <Link to="/checkout">

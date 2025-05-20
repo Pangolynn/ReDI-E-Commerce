@@ -48,3 +48,5 @@ filter the products, add them to a shopping cart, and (mock) checkout.
 - https://eslint.org/docs/
 - https://medium.com/@grantsky0503/setup-eslint-and-prettier-in-react-app-7c46b37697f6
 - https://prettier.io/
+- https://currency.js.org/
+- https://www.robinwieruch.de/javascript-rounding-errors/

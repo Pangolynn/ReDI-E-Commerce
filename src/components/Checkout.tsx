@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router";
 import { Form } from "./Form.tsx";
 import { Input } from "./Input.tsx";
+import currency from "currency.js";
 
 // all the fields for our checkout form
 export type Inputs = {
@@ -152,16 +153,19 @@ export const Checkout = () => {
                                         {product.title} x {product.quantity}
                                     </h3>
                                     <span className="block text-end">
-                                        $
-                                        {(product.quantity || 1) *
-                                            product.price}
+                                        {currency(
+                                            (product.quantity || 1) *
+                                                product.price,
+                                        ).format()}
                                     </span>
                                 </div>
                             );
                         })}
                     </div>
                     <hr className="mt-10 mb-4 border-gray-300" />
-                    <div className="mt-4 text-end">Total: ${total}</div>
+                    <div className="mt-4 text-end">
+                        Total: {currency(total).format()}
+                    </div>
                 </div>
             </div>
         </div>

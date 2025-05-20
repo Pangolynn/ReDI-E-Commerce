@@ -4,6 +4,7 @@ import { CartContext } from "../contexts/CartContext.tsx";
 import { useContext } from "react";
 import { Inputs } from "./Checkout.tsx";
 import heart from "../assets/heart.svg";
+import currency from "currency.js";
 
 // Display total paid and customer info after checkout
 export const Receipt = () => {
@@ -45,7 +46,7 @@ export const Receipt = () => {
                 <div>Zip Code: {form.zipCode}</div>
                 <div>Phone: {form.phone}</div>
                 <hr className="" />
-                <div className="my-4">Total: ${total}</div>
+                <div className="my-4">Total: {currency(total).format()}</div>
             </div>
         </>
     );

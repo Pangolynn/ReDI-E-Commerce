@@ -2,6 +2,7 @@ import { ProductType } from "./Products.tsx";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { CartContext } from "../contexts/CartContext.tsx";
+import currency from "currency.js";
 
 // Fetches & displays a specific product from API
 export const ProductDetails = () => {
@@ -73,7 +74,9 @@ export const ProductDetails = () => {
                         {product.category}
                     </span>
                     <p className="my-2">{product.description}</p>
-                    <div className="font-bold">${product.price}</div>
+                    <div className="font-bold">
+                        {currency(product.price).format()}
+                    </div>
                     <button
                         onClick={() => addToCart(product)}
                         className="rounded cursor-pointer transition active:scale-95 mt-4 w-30 py-2 text-stone-900 bg-sakura hover:bg-rose-200"

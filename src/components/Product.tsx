@@ -2,6 +2,7 @@ import { ProductType } from "./Products.tsx";
 import { useContext } from "react";
 import { CartContext } from "../contexts/CartContext.tsx";
 import { Link } from "react-router";
+import currency from "currency.js";
 
 type ProductProps = {
     product: ProductType;
@@ -25,7 +26,9 @@ export const Product = ({ product }: ProductProps) => {
                     />
                 </Link>
             </div>
-            <span className="font-bold">${product.price}</span>
+            <span className="font-bold">
+                {currency(product.price).format()}
+            </span>
             <span>
                 <Link
                     to={`/product-details/${product.id}`}
