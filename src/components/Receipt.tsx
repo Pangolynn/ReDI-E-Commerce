@@ -37,7 +37,7 @@ export const Receipt = () => {
                 <div>Email: {form.email}</div>
                 <div>Address: {form.address}</div>
                 <div>City: {form.city}</div>
-                <div>Zip Code: {form.zip}</div>
+                <div>Zip Code: {form.zipCode}</div>
                 <div>Phone: {form.phone}</div>
                 <hr className="" />
                 <div className="my-4">Total: {total}</div>

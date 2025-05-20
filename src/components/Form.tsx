@@ -35,7 +35,9 @@ export function Form({ children, onSubmit }: formInputs) {
                                         register,
                                         // let ts know the names we pass in are
                                         // valid keys for accessing the errors
-                                        errors: errors[child.props.name],
+                                        errors: errors[
+                                            child.props.name as keyof Inputs
+                                        ],
                                         key: child.props.name,
                                     },
                                 })

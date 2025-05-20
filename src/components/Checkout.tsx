@@ -13,9 +13,9 @@ export type Inputs = {
     address: string;
     city: string;
     state: string;
-    zip: string;
+    zipCode: string;
     country: string;
-    creditCard: string;
+    creditCardNumber: string;
     expiration: string;
     phone: string;
 };
