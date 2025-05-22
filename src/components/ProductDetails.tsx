@@ -29,7 +29,7 @@ export const ProductDetails = () => {
             }
         };
         fetchProduct();
-    }, []);
+    }, [id]);
 
     return (
         <div className="px-6 sm:px-0 mb-10">

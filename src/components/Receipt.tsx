@@ -14,7 +14,7 @@ export const Receipt = () => {
     const { removeAllFromCart } = useContext(CartContext);
 
     const [form, setForm] = useState<Inputs>({} as Inputs);
-    const [total, setTotal] = useState(0);
+    const [total, setTotal] = useState<number>(0);
 
     useEffect(() => {
         // if we have no state (someone navigates here directly)

@@ -1,10 +1,11 @@
 import { SubmitHandler } from "react-hook-form";
 import { CartContext } from "../contexts/CartContext.tsx";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import { Form } from "./Form.tsx";
 import { Input } from "./Input.tsx";
 import currency from "currency.js";
+import { useEffect } from "react";
 
 // all the fields for our checkout form
 export type Inputs = {
@@ -31,6 +32,10 @@ export type Validation = {
 export const Checkout = () => {
     const navigate = useNavigate();
     const { cart } = useContext(CartContext);
+    const [total, setTotal] = useState<number>(0);
+
+    // the customer's total bill amount
+    // let total: number = 0;
 
     // navigate to the checkout page after the user submits
     // send the submitted data and the total
@@ -43,8 +48,14 @@ export const Checkout = () => {
         });
     };
 
-    // the customer's total bill amount
-    let total: number = 0;
+    useEffect(() => {
+        // calculate total from cart products
+        let total: number = 0;
+        cart.forEach((item) => {
+            total += item.price * (item.quantity || 1);
+        });
+        setTotal(total);
+    }, [cart]);
 
     return (
         <div className="container mx-auto">
@@ -143,7 +154,7 @@ export const Checkout = () => {
                         <hr className="mt-1 mb-4" />
 
                         {cart.map((product) => {
-                            total += product.price * (product.quantity || 1);
+                            // total += product.price * (product.quantity || 1);
                             return (
                                 <div
                                     key={product.id}
