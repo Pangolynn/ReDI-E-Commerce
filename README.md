@@ -50,3 +50,4 @@ filter the products, add them to a shopping cart, and (mock) checkout.
 - https://prettier.io/
 - https://currency.js.org/
 - https://www.robinwieruch.de/javascript-rounding-errors/
+- https://vitest.dev/guide/

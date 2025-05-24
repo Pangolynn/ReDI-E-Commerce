@@ -5,8 +5,13 @@ import { Link } from "react-router";
 import currency from "currency.js";
 
 export const Cart = () => {
-    const { cart, removeFromCart, removeAllFromCart, decreaseQuantity } =
-        useContext(CartContext);
+    const {
+        cart,
+        addToCart,
+        removeFromCart,
+        removeAllFromCart,
+        decreaseQuantity,
+    } = useContext(CartContext);
     let total = 0;
 
     return (
@@ -38,15 +43,26 @@ export const Cart = () => {
                                     </div>
                                     <div className="flex flex-col justify-center items-center gap-4 self-start">
                                         <p>Quantity: {product.quantity || 1}</p>
-                                        <button
-                                            aria-label="Decrease quantity by 1"
-                                            onClick={() =>
-                                                decreaseQuantity(product.id)
-                                            }
-                                            className="bg-red-100 rounded text-red-400 hover:text-red-600 px-2 hover:bg-red-200"
-                                        >
-                                            -
-                                        </button>
+                                        <div>
+                                            <button
+                                                aria-label="Decrease quantity by 1"
+                                                onClick={() =>
+                                                    decreaseQuantity(product.id)
+                                                }
+                                                className="mr-2 bg-red-100 rounded text-red-400 hover:text-red-600 px-2 hover:bg-red-200"
+                                            >
+                                                -
+                                            </button>
+                                            <button
+                                                aria-label="Decrease quantity by 1"
+                                                onClick={() =>
+                                                    addToCart(product)
+                                                }
+                                                className="bg-red-100 rounded text-red-400 hover:text-red-600 px-2 hover:bg-red-200"
+                                            >
+                                                +
+                                            </button>
+                                        </div>
                                         <span className="cost self-end">
                                             Price:{" "}
                                             {currency(
