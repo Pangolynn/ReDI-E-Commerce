@@ -60,7 +60,7 @@ export const Checkout = () => {
     return (
         <div className="container mx-auto">
             <h1 className="my-10 text-center text-2xl sm:text-3xl">Checkout</h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mx-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mx-4 font-[italiana]">
                 {/*Form and Input are custom components*/}
                 <Form onSubmit={onSubmit}>
                     <Input
@@ -160,23 +160,30 @@ export const Checkout = () => {
                                     key={product.id}
                                     className="grid grid-cols-2"
                                 >
-                                    <h3>
-                                        {product.title} x {product.quantity}
-                                    </h3>
-                                    <span className="block text-end">
-                                        {currency(
-                                            (product.quantity || 1) *
-                                                product.price,
-                                        ).format()}
-                                    </span>
+                                    <img
+                                        className="h-20 "
+                                        src={product.thumbnail}
+                                    />
+                                    <div className="text-end">
+                                        <h3>
+                                            {product.title} x {product.quantity}
+                                        </h3>
+
+                                        <span className="block mt-2">
+                                            {currency(
+                                                (product.quantity || 1) *
+                                                    product.price,
+                                            ).format()}
+                                        </span>
+                                    </div>
                                 </div>
                             );
                         })}
                     </div>
                     <hr className="mt-10 mb-4 border-gray-300" />
-                    <div className="mt-4 text-end">
+                    <h2 className="mt-4 mb-10 text-end font-bold">
                         Total: {currency(total).format()}
-                    </div>
+                    </h2>
                 </div>
             </div>
         </div>

@@ -29,10 +29,10 @@ export function Input({
 }: InputProps) {
     return (
         <>
-            <label className="text-sm italic block">{label}</label>
+            <label className="mt-4 text-sm italic block">{label}</label>
             <input
                 type={type}
-                className="block border-2 text-slate-700 border-gray-300 rounded-md p-1 focus:outline-none focus:ring-2 focus:ring-sakura"
+                className="mt-2 w-70 block border-2 text-slate-700 border-gray-300 rounded-md p-1 focus:outline-none focus:ring-2 focus:ring-sakura"
                 {...(register ? register(name, validation) : {})}
                 {...rest}
             />

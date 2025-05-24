@@ -23,7 +23,10 @@ export function Form({ children, onSubmit }: formInputs) {
     } = useForm<Inputs>();
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form
+            className="flex flex-col justify-center items-center sm:items-start"
+            onSubmit={handleSubmit(onSubmit)}
+        >
             {Array.isArray(children)
                 ? children.map((child) => {
                       // make sure the child is an Input component
