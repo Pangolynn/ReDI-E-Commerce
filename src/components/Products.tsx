@@ -43,7 +43,7 @@ export const Products = () => {
                 Products
             </h1>
             <select
-                className="text-end"
+                className="ml-2 mt-2 border-b-sakura border-b-2 w-24"
                 name="category"
                 value={filter}
                 onChange={(e) => filterProducts(e.target.value)}
@@ -52,7 +52,8 @@ export const Products = () => {
                 {categories.map((category) => {
                     return (
                         <option key={category} value={category}>
-                            {category}
+                            {category.charAt(0).toUpperCase() +
+                                category.slice(1)}
                         </option>
                     );
                 })}
