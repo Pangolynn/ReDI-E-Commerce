@@ -3,13 +3,20 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { CartContext } from "../contexts/CartContext.tsx";
 import currency from "currency.js";
+import Snackbar from "@mui/material/Snackbar";
 
 // Fetches & displays a specific product from API
 export const ProductDetails = () => {
     const [product, setProduct] = useState<ProductType>({} as ProductType);
+    // state for snackbar message
+    const [open, setOpen] = useState(false);
     // Get the specific product ID from our url parameters
     const { id } = useParams();
     const { addToCart } = useContext(CartContext);
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     useEffect(() => {
         // fetch the specific product we want based on the id passed in the url
@@ -78,11 +85,20 @@ export const ProductDetails = () => {
                         {currency(product.price).format()}
                     </div>
                     <button
-                        onClick={() => addToCart(product)}
+                        onClick={() => {
+                            setOpen(true);
+                            addToCart(product);
+                        }}
                         className="rounded cursor-pointer transition active:scale-95 mt-4 w-30 py-2 text-stone-900 bg-sakura hover:bg-rose-200"
                     >
                         Add to Cart
                     </button>
+                    <Snackbar
+                        open={open}
+                        autoHideDuration={4000}
+                        onClose={handleClose}
+                        message="Product added to cart"
+                    />
                 </div>
             </div>
         </div>

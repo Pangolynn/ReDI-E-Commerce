@@ -34,9 +34,6 @@ export const Checkout = () => {
     const { cart } = useContext(CartContext);
     const [total, setTotal] = useState<number>(0);
 
-    // the customer's total bill amount
-    // let total: number = 0;
-
     // navigate to the checkout page after the user submits
     // send the submitted data and the total
     const onSubmit: SubmitHandler<Inputs> = (data) => {
@@ -110,7 +107,7 @@ export const Checkout = () => {
                         validation={{ required: true, maxLength: 30 }}
                         label="Zip Code"
                         name="zipCode"
-                        type="number"
+                        type="text"
                     />
                     <Input
                         validation={{ required: true, maxLength: 100 }}
@@ -154,7 +151,6 @@ export const Checkout = () => {
                         <hr className="mt-1 mb-4" />
 
                         {cart.map((product) => {
-                            // total += product.price * (product.quantity || 1);
                             return (
                                 <div
                                     key={product.id}
