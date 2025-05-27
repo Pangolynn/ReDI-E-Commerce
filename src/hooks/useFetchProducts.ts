@@ -4,42 +4,51 @@ import { ProductType } from "../components/Products.tsx";
 export const useFetchProducts = () => {
     const [products, setProducts] = useState<ProductType[]>([]);
     const [selectedProducts, setSelectedProducts] = useState<ProductType[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
     const [categories, setCategories] = useState<string[]>([]);
 
     useEffect(() => {
+        // setup an abort controller to cancel fetch request on unmount
+        const controller = new AbortController();
+        // define the API endpoint
+        const API_NAME = "https://dummyjson.com/products";
+
         const fetchData = async () => {
             try {
-                setIsLoading(true);
-                const data = await fetch("https://dummyjson.com/products");
+                const data = await fetch(API_NAME, {
+                    signal: controller.signal,
+                });
+                // check if we got an OK from the fetch request
                 if (!data.ok) {
-                    throw new Error("Fetch failed: not OK");
+                    setError(data.status.toString());
                 }
                 const json = await data.json();
                 const jsonProducts = json.products as ProductType[];
-                // set all of the products
+                // set our products and initial selected products state
                 setProducts(jsonProducts);
-                // selectedProducts will change based on filters, start with all
-                setSelectedProducts(json.products);
-                // Get the unique categories from the product data to use as
-                // filter options
+                setSelectedProducts(jsonProducts);
+                // find out the available product categories and store them
                 const categoriesArray: string[] = jsonProducts.map(
                     (product) => product.category,
                 );
-                // set the available categories state
                 setCategories(Array.from(new Set(categoriesArray)));
-                setIsLoading(false);
-            } catch (e) {
-                if (e instanceof Error) {
-                    setIsLoading(false);
-                    throw new Error(e.message);
-                } else {
-                    setIsLoading(false);
-                    throw e;
+            } catch (err: unknown) {
+                // check the kind of error we got and update the error message state
+                if (err instanceof Error && err.name !== "AbortError") {
+                    setError(err.message);
                 }
+                console.log(err, "of type ", typeof err);
+                setError(typeof err);
+            } finally {
+                setIsLoading(false);
+                console.log(error);
             }
         };
         fetchData();
+
+        // cleanup our fetch request on onmount
+        return () => controller?.abort("Cleanup");
     }, []);
 
     return {

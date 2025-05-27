@@ -51,3 +51,5 @@ filter the products, add them to a shopping cart, and (mock) checkout.
 - https://currency.js.org/
 - https://www.robinwieruch.de/javascript-rounding-errors/
 - https://vitest.dev/guide/
+- https://refine.dev/blog/useeffect-cleanup/
+- https://www.totaltypescript.com/concepts/object-is-of-type-unknown
