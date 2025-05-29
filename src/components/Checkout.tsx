@@ -137,9 +137,10 @@ export const Checkout = () => {
                     />
 
                     <input
-                        className="mb-20 rounded cursor-pointer transition active:scale-95 mt-4 w-30 py-2 text-stone-900 bg-sakura hover:bg-rose-200"
+                        className="mb-20 rounded cursor-pointer transition active:scale-95 mt-4 w-30 py-2 text-stone-900 bg-sakura hover:bg-rose-200 disabled:bg-gray-300 disabled:cursor-not-allowed"
                         value="Checkout"
                         type="submit"
+                        disabled={cart.length === 0}
                     />
                 </Form>
 
@@ -151,7 +152,9 @@ export const Checkout = () => {
                             <h2 className="text-end">Price</h2>
                         </div>
                         <hr className="mt-1 mb-4" />
-
+                        {cart.length === 0 && (
+                            <div>No Products in your Cart.</div>
+                        )}
                         {cart.map((product) => {
                             return (
                                 <div
