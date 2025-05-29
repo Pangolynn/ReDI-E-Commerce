@@ -24,6 +24,7 @@ export function Form({ children, onSubmit }: formInputs) {
 
     return (
         <form
+            aria-label="Checkout Form"
             className="flex flex-col justify-center items-center sm:items-start"
             onSubmit={handleSubmit(onSubmit)}
         >
