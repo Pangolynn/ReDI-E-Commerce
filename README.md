@@ -53,3 +53,4 @@ filter the products, add them to a shopping cart, and (mock) checkout.
 - https://vitest.dev/guide/
 - https://refine.dev/blog/useeffect-cleanup/
 - https://www.totaltypescript.com/concepts/object-is-of-type-unknown
+- https://betterstack.com/community/guides/testing/vitest-explained/

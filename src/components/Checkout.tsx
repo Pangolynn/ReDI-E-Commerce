@@ -65,6 +65,7 @@ export const Checkout = () => {
                         label="First Name"
                         name="firstName"
                         type="text"
+                        data-testid="firstName"
                     />
                     <Input
                         validation={{ required: true, maxLength: 100 }}
@@ -84,6 +85,7 @@ export const Checkout = () => {
                         label="Email"
                         name="email"
                         type="email"
+                        data-testid="email"
                     />
                     <Input
                         validation={{ required: true, maxLength: 100 }}
@@ -157,6 +159,7 @@ export const Checkout = () => {
                                     className="grid grid-cols-2"
                                 >
                                     <img
+                                        alt={product.title}
                                         className="h-20 "
                                         src={product.thumbnail}
                                     />

@@ -42,7 +42,7 @@ export const Receipt = () => {
                 </div>
                 <div>Email: {form.email}</div>
                 <div>Address: {form.address}</div>
-                <div>City: {form.city}</div>
+                <div data-testid="city">City: {form.city}</div>
                 <div>Zip Code: {form.zipCode}</div>
                 <div>Phone: {form.phone}</div>
                 <hr className="" />
