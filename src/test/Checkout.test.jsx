@@ -4,7 +4,7 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router";
 
 describe("Checkout", () => {
-    it.only("should display checkout form input fields", () => {
+    it("should display checkout form input fields", () => {
         render(
             <MemoryRouter initialEntries={["/checkout"]}>
                 <Routes>

@@ -6,7 +6,7 @@ function App() {
     return (
         <CartProvider>
             <div className="app-container">
-                <nav className="py-4 flex justify-between pr-2 bg-sakura">
+                <nav className="text-sm sm:text-xl py-4 flex items-center justify-between pr-2 bg-sakura">
                     <div className="mx-4">
                         <Link to="/">ReDI E-Commerce</Link>
                     </div>

@@ -73,12 +73,12 @@ export const ProductDetails = () => {
                 )}
 
                 <div className="product-description sm:w-1/2">
-                    <h2 className="font-extrabold my-2">{product.title}</h2>
+                    <h2 className="font-extrabold mt-2">{product.title}</h2>
+                    <div className="italic font-thin capitalize">
+                        {product.category}
+                    </div>
                     <span className="font-semibold">
                         Rating: {product.rating} ⭐
-                    </span>
-                    <span className="italic ml-2 font-thin">
-                        {product.category}
                     </span>
                     <p className="my-2">{product.description}</p>
                     <div className="font-bold">
