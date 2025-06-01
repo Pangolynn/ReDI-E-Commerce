@@ -39,11 +39,11 @@ filter the products, add them to a shopping cart and remove them, and (mock) che
 - Eslint
 
 ## Setup Instructions
-Clone the repository: `git clone git@github.com:Pangolynn/ReDI-E-Commerce.git`
-Change directory to the project
-Install dependencies: `npm install`
-Run the project: `npm run dev`
-Run tests: `npx vitest`
+- Clone the repository: `git clone git@github.com:Pangolynn/ReDI-E-Commerce.git`
+- Change directory to the project
+- Install dependencies: `npm install`
+- Run the project: `npm run dev`
+- Run tests: `npx vitest`
 
 ## Sources & References
 
