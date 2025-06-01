@@ -1,5 +1,5 @@
 import { ProductType } from "./Products.tsx";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 import { CartContext } from "../contexts/CartContext.tsx";
 import currency from "currency.js";
@@ -13,29 +13,58 @@ export const ProductDetails = () => {
     // Get the specific product ID from our url parameters
     const { id } = useParams();
     const { addToCart } = useContext(CartContext);
+    const API_BASE = "https://dummyjson.com/products/";
+
+    // controllerRef is needed to keep track of the current AbortController instance
+    const controllerRef = useRef<AbortController | null>(null);
+    const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
 
     const handleClose = () => {
         setOpen(false);
     };
 
     useEffect(() => {
+        // Check for previous fetch call
+        // and abort it.
+        if (controllerRef.current) {
+            controllerRef.current.abort();
+        }
+
+        // create a new AbortController instance so
+        // we can abort the fetch if we unmount.
+        const controller = new AbortController();
+        // update our controllerRef to be our new controller instance
+        controllerRef.current = controller;
+
         // fetch the specific product we want based on the id passed in the url
         const fetchProduct = async () => {
             try {
-                const data = await fetch(
-                    `https://dummyjson.com/products/${id}`,
-                );
+                const data = await fetch(`${API_BASE}${id}`, {
+                    signal: controller.signal,
+                });
+                if (!data.ok) {
+                    setError("Product not found");
+                }
+
                 const json = await data.json();
                 setProduct(json);
             } catch (e) {
-                if (e instanceof Error) {
-                    throw new Error(e.message);
+                if (e instanceof DOMException && e.name === "AbortError") {
+                    console.log("Fetch Aborted");
+                } else if (e instanceof Error) {
+                    setError(e.message);
                 } else {
-                    throw e;
+                    setError("An Unknown Error Occurred.");
                 }
+            } finally {
+                setLoading(false);
+                console.log("Product Details", error);
             }
         };
         fetchProduct();
+
+        return () => controller?.abort();
     }, [id]);
 
     return (
@@ -44,7 +73,7 @@ export const ProductDetails = () => {
                 Product Details
             </h1>
             <div className="flex flex-col sm:flex-row items-center justify-around">
-                {product.thumbnail ? (
+                {!loading ? (
                     <img
                         className="sm:w-1/3"
                         src={product.thumbnail}

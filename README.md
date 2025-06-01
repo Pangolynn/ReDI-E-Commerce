@@ -55,3 +55,6 @@ filter the products, add them to a shopping cart, and (mock) checkout.
 - https://www.totaltypescript.com/concepts/object-is-of-type-unknown
 - https://betterstack.com/community/guides/testing/vitest-explained/
 - https://github.com/maksugr/testing-example/tree/main
+- https://www.linkedin.com/pulse/react-pro-tip-use-abortcontroller-useref-clean-async-ali-shirzadeh-vv5tf/
+- https://medium.com/@nusaifanoushad/create-a-reference-to-an-abortcontroller-using-useref-74e005a45a19
+- https://javascript.plainenglish.io/stop-that-fetch-call-right-now-854fd26e78af
