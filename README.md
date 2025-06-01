@@ -5,15 +5,19 @@ Integration, and used as my final project for the 'Web Dev Advanced' course.
 It is a mock e-commerce website built with React + Vite, where it fetches
 mock products from an API (https://dummyjson.com/products) and displays a list
 of these products to the user. You can then view each product individually,
-filter the products, add them to a shopping cart, and (mock) checkout.
+filter the products, add them to a shopping cart and remove them, and (mock) checkout.
 
 ## Features/Functionality
 
 - Fetch products from an API
 - Display list of products
-- Filter products
-- Shopping Cart
+- Routing to multiple pages with React Router
+- Filter products by category
+- Add and remove products from Cart
+- Persistent Shopping Cart with Local Storage
 - Checkout form
+- Responsive Styling
+- Receipt Page
 - Individual product details
 
 ## Technologies Used
@@ -26,9 +30,20 @@ filter the products, add them to a shopping cart, and (mock) checkout.
 - Tailwind CSS
 - React Router
 - npm
+- React Hook Form
 - GitHub
+- React Testing Library
+- Vitest
+- Material UI
+- Prettier
+- Eslint
 
 ## Setup Instructions
+Clone the repository: `git clone git@github.com:Pangolynn/ReDI-E-Commerce.git`
+Change directory to the project
+Install dependencies: `npm install`
+Run the project: `npm run dev`
+Run tests: `npx vitest`
 
 ## Sources & References
 
