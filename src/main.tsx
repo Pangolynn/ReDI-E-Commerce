@@ -8,6 +8,7 @@ import { ProductDetails } from "./components/ProductDetails.tsx";
 import { Cart } from "./components/Cart.tsx";
 import { Checkout } from "./components/Checkout.tsx";
 import { Receipt } from "./components/Receipt.tsx";
+import { NotFound } from "./components/NotFound.tsx";
 
 const router = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
             {
                 path: "receipt",
                 Component: Receipt,
+            },
+            {
+                path: "*",
+                Component: NotFound,
             },
         ],
     },
